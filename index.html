@@ -3,180 +3,262 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GOTRADE</title>
-
+  <title>GOTRADE - Trading Capital Management</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
+    :root {
+      --bg-main: #0b0f17;
+      --bg-card: #131b26;
+      --bg-input: #080c11;
+      --border-color: #1e293b;
+      --accent-blue: #2563eb;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --text-muted: #64748b;
     }
 
-    body {
-      min-height: 100vh;
-      background: #0b0f14;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { background: var(--bg-main); color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; }
 
-    .login-box {
-      width: 100%;
+    /* Container Utama */
+    .app-container { width: 100%; max-width: 1200px; margin: 0 auto; }
+
+    /* --- TAMPILAN LOGIN --- */
+    #loginSection {
       max-width: 380px;
-      background: #121821;
+      margin: 0 auto;
+      background: var(--bg-card);
       padding: 32px 25px;
       border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
     }
 
-    .logo {
-      text-align: center;
-      font-size: 36px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-    }
+    .login-logo { text-align: center; font-size: 32px; font-weight: 800; letter-spacing: 2px; color: #3b82f6; }
+    .login-subtitle { text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 25px; }
+    
+    label { display: block; font-size: 12px; color: #94a3b8; margin: 10px 0 4px; }
+    input, select { width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 10px; color: #fff; font-size: 14px; outline: none; }
+    input:focus { border-color: #3b82f6; }
 
-    .subtitle {
-      text-align: center;
-      color: #8e9aaa;
-      font-size: 14px;
-      margin-bottom: 30px;
-    }
+    .btn-login { width: 100%; padding: 12px; background: var(--accent-blue); border: none; border-radius: 10px; color: white; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+    .admin-link { display: block; text-align: center; margin-top: 15px; color: #60a5fa; text-decoration: none; font-size: 13px; }
+    .footer { text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 11px; }
+    .error-msg { color: var(--accent-red); text-align: center; font-size: 12px; margin-top: 10px; display: none; }
 
-    label {
-      display: block;
-      color: #cbd3df;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
+    /* --- TAMPILAN DASHBOARD --- */
+    #dashboardSection { display: none; width: 100%; }
 
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 18px;
-      border: 1px solid #293342;
-      border-radius: 10px;
-      background: #0b1017;
-      color: white;
-      outline: none;
-      font-size: 15px;
-    }
+    header { background: var(--bg-card); padding: 15px 20px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    .brand { font-size: 20px; font-weight: 800; color: #3b82f6; }
+    .clock { text-align: right; font-size: 13px; color: var(--accent-green); font-weight: bold; }
 
-    input:focus {
-      border-color: #3b82f6;
-    }
+    .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 15px; }
+    .stat-card { background: var(--bg-card); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); }
+    .stat-title { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: bold; }
+    .stat-value { font-size: 18px; font-weight: 700; margin-top: 5px; }
 
-    .login-btn {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      background: #2563eb;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+    .dashboard-layout { display: grid; grid-template-columns: 1fr; gap: 15px; }
+    @media (min-width: 900px) { .dashboard-layout { grid-template-columns: 320px 1fr; } }
 
-    .login-btn:active {
-      transform: scale(0.98);
-    }
+    .card { background: var(--bg-card); border-radius: 12px; padding: 18px; border: 1px solid var(--border-color); margin-bottom: 15px; }
+    .card-title { font-size: 14px; font-weight: bold; color: #93c5fd; margin-bottom: 10px; }
 
-    .admin {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      color: #60a5fa;
-      text-decoration: none;
-      font-size: 14px;
-    }
+    button.btn-action { width: 100%; padding: 10px; background: var(--accent-blue); border: none; border-radius: 8px; color: #fff; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    button.btn-logout { background: #334155; }
 
-    .footer {
-      text-align: center;
-      margin-top: 25px;
-      color: #667085;
-      font-size: 12px;
-    }
-
-    .error {
-      color: #ff6b6b;
-      text-align: center;
-      font-size: 13px;
-      margin-top: 15px;
-      display: none;
-    }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; text-align: left; }
+    th, td { padding: 10px; border-bottom: 1px solid var(--border-color); }
+    th { color: var(--text-muted); font-weight: 600; }
+    .badge-win { color: var(--accent-green); font-weight: bold; }
+    .badge-loss { color: var(--accent-red); font-weight: bold; }
   </style>
 </head>
-
 <body>
 
-  <div class="login-box">
+  <div class="app-container">
 
-    <div class="logo">GOTRADE</div>
+    <!-- 1. FORM LOGIN -->
+    <div id="loginSection">
+      <div class="login-logo">GOTRADE</div>
+      <div class="login-subtitle">Trading Capital Management</div>
 
-    <div class="subtitle">
-      Trading Capital Management
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Masukkan username">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Masukkan password">
+
+      <div class="error-msg" id="error">Username dan password wajib diisi.</div>
+
+      <button class="btn-login" onclick="login()">LOGIN</button>
+      <a class="admin-link" href="https://wa.me/6285205110015" target="_blank">Hubungi Admin</a>
+      <div class="footer">© 2026 GOTRADE</div>
     </div>
 
-    <label for="username">Username</label>
-    <input
-      type="text"
-      id="username"
-      placeholder="Masukkan username"
-      autocomplete="username"
-    >
+    <!-- 2. DASHBOARD PROFESIONAL -->
+    <div id="dashboardSection">
+      
+      <header>
+        <div class="brand">GOTRADE <span style="font-size: 11px; color: var(--text-muted); font-weight: normal;">PRO</span></div>
+        <div class="clock" id="liveClock">00:00:00</div>
+      </header>
 
-    <label for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      placeholder="Masukkan password"
-      autocomplete="current-password"
-    >
+      <div class="grid-stats">
+        <div class="stat-card">
+          <div class="stat-title">Modal Utama</div>
+          <div class="stat-value" id="dispEquity">Rp 1.000.000</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">Target Profit Harian</div>
+          <div class="stat-value" style="color: var(--accent-green);" id="dispTarget">+ Rp 100.000 (10%)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">Estimasi Total Saldo</div>
+          <div class="stat-value" style="color: #60a5fa;" id="dispTotal">Rp 1.100.000</div>
+        </div>
+      </div>
 
-    <button class="login-btn" onclick="login()">
-      LOGIN
-    </button>
+      <div class="dashboard-layout">
+        
+        <!-- Kolom Kiri: Pengaturan & Input Trade -->
+        <div>
+          <div class="card">
+            <div class="card-title">Hitung Target Profit</div>
+            <label>Modal Saat Ini (Rp)</label>
+            <input type="number" id="inputCapital" value="1000000" oninput="updateStats()">
+            
+            <label>Target Profit (%)</label>
+            <input type="number" id="inputTarget" value="10" oninput="updateStats()">
+          </div>
 
-    <div class="error" id="error">
-      Username dan password wajib diisi.
-    </div>
+          <div class="card">
+            <div class="card-title">Input Jurnal Trade</div>
+            <label>Pasangan Aset / Pair</label>
+            <input type="text" id="tradePair" placeholder="Contoh: BTC/USDT">
+            
+            <label>Hasil Trade</label>
+            <select id="tradeResult">
+              <option value="WIN">WIN (+)</option>
+              <option value="LOSS">LOSS (-)</option>
+            </select>
 
-    <a
-      class="admin"
-      href="https://wa.me/6285205110015"
-      target="_blank"
-    >
-      Hubungi Admin
-    </a>
+            <label>Nominal (Rp)</label>
+            <input type="number" id="tradeAmount" placeholder="100000">
 
-    <div class="footer">
-      © 2026 GOTRADE
+            <button class="btn-action" onclick="addJournal()">Simpan Transaksi</button>
+          </div>
+
+          <button class="btn-action btn-logout" onclick="logout()">LOGOUT</button>
+        </div>
+
+        <!-- Kolom Kanan: Tabel Jurnal Transaksi -->
+        <div class="card">
+          <div class="card-title">Jurnal Transaksi Harian</div>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Waktu</th>
+                  <th>Pair</th>
+                  <th>Hasil</th>
+                  <th>Nominal</th>
+                </tr>
+              </thead>
+              <tbody id="journalBody">
+                <tr>
+                  <td>09:15</td>
+                  <td>BTC/USDT</td>
+                  <td><span class="badge-win">WIN</span></td>
+                  <td style="color: var(--accent-green);">+ Rp 100.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
 
   <script>
+    // Fungsi Login
     function login() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const err = document.getElementById("error");
 
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const error = document.getElementById("error");
-
-      if (username === "" || password === "") {
-        error.style.display = "block";
-        error.textContent = "Username dan password wajib diisi.";
+      if (user === "" || pass === "") {
+        err.style.display = "block";
         return;
       }
 
-      error.style.display = "none";
+      err.style.display = "none";
+      document.getElementById("loginSection").style.display = "none";
+      document.getElementById("dashboardSection").style.display = "block";
+      document.body.style.alignItems = "stretch"; // Mengatur tampilan full screen untuk dashboard
 
-      alert("Login berhasil!");
+      startClock();
+      updateStats();
+    }
 
+    // Fungsi Logout
+    function logout() {
+      document.getElementById("dashboardSection").style.display = "none";
+      document.getElementById("loginSection").style.display = "block";
+      document.body.style.alignItems = "center";
+    }
+
+    // Jam Realtime
+    function startClock() {
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById("liveClock").textContent = now.toLocaleTimeString('id-ID');
+      }, 1000);
+    }
+
+    // Format Rupiah
+    function fmt(val) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
+    }
+
+    // Hitung Otomatis
+    function updateStats() {
+      const cap = parseFloat(document.getElementById('inputCapital').value) || 0;
+      const targetPct = parseFloat(document.getElementById('inputTarget').value) || 0;
+      
+      const targetVal = cap * (targetPct / 100);
+      const totalVal = cap + targetVal;
+
+      document.getElementById('dispEquity').textContent = fmt(cap);
+      document.getElementById('dispTarget').textContent = `+ ${fmt(targetVal)} (${targetPct}%)`;
+      document.getElementById('dispTotal').textContent = fmt(totalVal);
+    }
+
+    // Tambah Jurnal
+    function addJournal() {
+      const pair = document.getElementById('tradePair').value || 'Aset';
+      const res = document.getElementById('tradeResult').value;
+      const amt = parseFloat(document.getElementById('tradeAmount').value) || 0;
+      const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+      const tbody = document.getElementById('journalBody');
+      const row = document.createElement('tr');
+
+      const isWin = res === 'WIN';
+      const badgeClass = isWin ? 'badge-win' : 'badge-loss';
+      const colorStyle = isWin ? 'color: var(--accent-green);' : 'color: var(--accent-red);';
+      const sign = isWin ? '+' : '-';
+
+      row.innerHTML = `
+        <td>${time}</td>
+        <td>${pair}</td>
+        <td><span class="${badgeClass}">${res}</span></td>
+        <td style="${colorStyle}">${sign} ${fmt(amt)}</td>
+      `;
+
+      tbody.prepend(row);
     }
   </script>
 
