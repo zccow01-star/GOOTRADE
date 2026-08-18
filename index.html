@@ -39,61 +39,14 @@
       max-width: 380px;
       margin: 0 auto;
       background: var(--bg-card);
-      padding: 25px 20px;
+      padding: 32px 25px;
       border-radius: 20px;
       border: 1px solid var(--border-color);
       box-shadow: 0 15px 40px rgba(0,0,0,0.5);
     }
 
-    .login-logo { text-align: center; font-size: 30px; font-weight: 800; letter-spacing: 2px; color: #3b82f6; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .login-subtitle { text-align: center; color: var(--text-muted); font-size: 12px; margin-bottom: 15px; }
-
-    /* --- KALKULATOR MULTIFUNGSI --- */
-    .calc-container {
-      background: var(--bg-input);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 15px;
-    }
-
-    .calc-display {
-      width: 100%;
-      height: 45px;
-      background: #000;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      color: #10b981;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: right;
-      padding: 8px 12px;
-      margin-bottom: 10px;
-      outline: none;
-    }
-
-    .calc-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-    }
-
-    .calc-btn {
-      padding: 10px 0;
-      font-size: 14px;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      background: #1e293b;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .calc-btn:active { background: #334155; }
-    .calc-btn.op { background: #2563eb; color: #fff; }
-    .calc-btn.clear { background: #ef4444; color: #fff; }
-    .calc-btn.equal { background: #10b981; color: #fff; grid-column: span 2; }
+    .login-logo { text-align: center; font-size: 32px; font-weight: 800; letter-spacing: 2px; color: #3b82f6; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .login-subtitle { text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 25px; }
     
     label { display: block; font-size: 12px; color: #94a3b8; margin: 10px 0 4px; }
     input, select { width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 10px; color: #fff; font-size: 14px; outline: none; }
@@ -135,6 +88,53 @@
     .date-badge { background: var(--bg-input); padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); color: #94a3b8; }
     .clock { color: var(--accent-green); font-weight: bold; font-size: 13px; }
 
+    /* --- KALKULATOR DASHBOARD (DI BAWAH LOGO HEADER) --- */
+    .calc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .calc-display {
+      width: 100%;
+      height: 40px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #10b981;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .calc-btn {
+      padding: 10px 0;
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      background: #1e293b;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .calc-btn:active { background: #334155; }
+    .calc-btn.op { background: #2563eb; color: #fff; }
+    .calc-btn.clear { background: #ef4444; color: #fff; }
+    .calc-btn.equal { background: #10b981; color: #fff; grid-column: span 2; }
+
     .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 15px; }
     .stat-card { background: var(--bg-card); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); }
     .stat-title { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: bold; }
@@ -171,8 +171,37 @@
       </div>
       <div class="login-subtitle">Trading Capital Management</div>
 
-      <!-- KALKULATOR TAMPIL DI BAWAH LOGO -->
-      <div class="calc-container">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Masukkan username">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Masukkan password">
+
+      <div class="error-msg" id="error">Username dan password wajib diisi.</div>
+
+      <button class="btn-login" onclick="login()">LOGIN</button>
+      <a class="admin-link" href="https://wa.me/6285205110015" target="_blank">Hubungi Admin</a>
+      <div class="footer">© 2026 GOTRADE</div>
+    </div>
+
+    <!-- 2. HALAMAN DASHBOARD PROFESIONAL -->
+    <div id="dashboardSection">
+      
+      <!-- Custom Header Bar (LOGO DASHBOARD) -->
+      <header>
+        <div class="brand-logo">
+          <div class="logo-icon"></div>
+          <div class="brand-title">GOTRADE <span style="font-size: 11px; color: var(--text-muted); font-weight: normal;">PRO</span></div>
+        </div>
+        <div class="header-info">
+          <div class="date-badge" id="currentDate">Memuat tanggal...</div>
+          <div class="clock" id="liveClock">00:00:00</div>
+        </div>
+      </header>
+
+      <!-- KALKULATOR TEPAT DI BAWAH LOGO HEADER -->
+      <div class="calc-card">
+        <div class="card-title" style="margin-bottom: 8px;">Kalkulator Quick Trade</div>
         <input type="text" id="calcDisplay" class="calc-display" value="0" readonly>
         <div class="calc-grid">
           <button class="calc-btn clear" onclick="calcClear()">C</button>
@@ -200,34 +229,6 @@
           <button class="calc-btn equal" onclick="calcCalculate()">=</button>
         </div>
       </div>
-
-      <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Masukkan username">
-
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Masukkan password">
-
-      <div class="error-msg" id="error">Username dan password wajib diisi.</div>
-
-      <button class="btn-login" onclick="login()">LOGIN</button>
-      <a class="admin-link" href="https://wa.me/6285205110015" target="_blank">Hubungi Admin</a>
-      <div class="footer">© 2026 GOTRADE</div>
-    </div>
-
-    <!-- 2. HALAMAN DASHBOARD PROFESIONAL -->
-    <div id="dashboardSection">
-      
-      <!-- Custom Header Bar -->
-      <header>
-        <div class="brand-logo">
-          <div class="logo-icon"></div>
-          <div class="brand-title">GOTRADE <span style="font-size: 11px; color: var(--text-muted); font-weight: normal;">PRO</span></div>
-        </div>
-        <div class="header-info">
-          <div class="date-badge" id="currentDate">Memuat tanggal...</div>
-          <div class="clock" id="liveClock">00:00:00</div>
-        </div>
-      </header>
 
       <!-- Stats Metric -->
       <div class="grid-stats">
