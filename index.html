@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOTRADE</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0b0f14;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 380px;
+      background: #121821;
+      padding: 32px 25px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #8e9aaa;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      color: #cbd3df;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid #293342;
+      border-radius: 10px;
+      background: #0b1017;
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: #3b82f6;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-btn:active {
+      transform: scale(0.98);
+    }
+
+    .admin {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #60a5fa;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #667085;
+      font-size: 12px;
+    }
+
+    .error {
+      color: #ff6b6b;
+      text-align: center;
+      font-size: 13px;
+      margin-top: 15px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-box">
+
+    <div class="logo">GOTRADE</div>
+
+    <div class="subtitle">
+      Trading Capital Management
+    </div>
+
+    <label for="username">Username</label>
+    <input
+      type="text"
+      id="username"
+      placeholder="Masukkan username"
+      autocomplete="username"
+    >
+
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      placeholder="Masukkan password"
+      autocomplete="current-password"
+    >
+
+    <button class="login-btn" onclick="login()">
+      LOGIN
+    </button>
+
+    <div class="error" id="error">
+      Username dan password wajib diisi.
+    </div>
+
+    <a
+      class="admin"
+      href="https://wa.me/6285205110015"
+      target="_blank"
+    >
+      Hubungi Admin
+    </a>
+
+    <div class="footer">
+      © 2026 GOTRADE
+    </div>
+
+  </div>
+
+  <script>
+    function login() {
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const error = document.getElementById("error");
+
+      if (username === "" || password === "") {
+        error.style.display = "block";
+        error.textContent = "Username dan password wajib diisi.";
+        return;
+      }
+
+      error.style.display = "none";
+
+      alert("Login berhasil!");
+
+    }
+  </script>
+
+</body>
+</html>
