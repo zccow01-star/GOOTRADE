@@ -4,8 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GOTRADE - Professional Trading Dashboard</title>
+
+  <!-- Meta & Link PWA (Agar Bisa Dipasang Sebagai Aplikasi HP) -->
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <meta name="theme-color" content="#0b0f17">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GOTRADE">
+
   <!-- Chart.js Library untuk Grafik -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
     :root {
       --bg-main: #0b0f17;
@@ -49,7 +59,6 @@
     /* --- DASHBOARD SECTION --- */
     #dashboardSection { display: none; width: 100%; }
 
-    /* Custom Header Bar dengan Logo Bintang GOTRADE */
     header {
       background: var(--bg-card);
       padding: 12px 20px;
@@ -63,12 +72,7 @@
       gap: 10px;
     }
 
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
+    .brand-logo { display: flex; align-items: center; gap: 10px; }
     .logo-icon {
       width: 32px;
       height: 32px;
@@ -77,41 +81,17 @@
       display: inline-block;
     }
 
-    .brand-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 1px;
-    }
+    .brand-title { font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: 1px; }
 
-    .header-info {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      font-size: 12px;
-    }
+    .header-info { display: flex; align-items: center; gap: 15px; font-size: 12px; }
+    .date-badge { background: var(--bg-input); padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); color: #94a3b8; }
+    .clock { color: var(--accent-green); font-weight: bold; font-size: 13px; }
 
-    .date-badge {
-      background: var(--bg-input);
-      padding: 6px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      color: #94a3b8;
-    }
-
-    .clock {
-      color: var(--accent-green);
-      font-weight: bold;
-      font-size: 13px;
-    }
-
-    /* Grid Stats */
     .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 15px; }
     .stat-card { background: var(--bg-card); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); }
     .stat-title { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: bold; }
     .stat-value { font-size: 18px; font-weight: 700; margin-top: 5px; }
 
-    /* Dashboard Layout */
     .dashboard-layout { display: grid; grid-template-columns: 1fr; gap: 15px; }
     @media (min-width: 900px) { .dashboard-layout { grid-template-columns: 320px 1fr; } }
 
@@ -136,7 +116,7 @@
 
   <div class="app-container">
 
-    <!-- 1. LOGIN SECTION -->
+    <!-- 1. HALAMAN LOGIN -->
     <div id="loginSection">
       <div class="login-logo">
         <div class="logo-icon"></div> GOTRADE
@@ -156,7 +136,7 @@
       <div class="footer">© 2026 GOTRADE</div>
     </div>
 
-    <!-- 2. DASHBOARD SECTION -->
+    <!-- 2. HALAMAN DASHBOARD PROFESIONAL -->
     <div id="dashboardSection">
       
       <!-- Custom Header Bar -->
@@ -171,7 +151,7 @@
         </div>
       </header>
 
-      <!-- Metric Quick Stats -->
+      <!-- Stats Metric -->
       <div class="grid-stats">
         <div class="stat-card">
           <div class="stat-title">Modal Utama (Equity)</div>
@@ -193,9 +173,8 @@
 
       <div class="dashboard-layout">
         
-        <!-- Sidebar Kiri: Input Deposit, Target & Trade -->
+        <!-- Panel Kiri: Input Data -->
         <div>
-          <!-- Card Deposit Modal -->
           <div class="card">
             <div class="card-title">Input Deposit Hari Ini</div>
             <label>Jumlah Deposit (Rp)</label>
@@ -203,7 +182,6 @@
             <button class="btn-action btn-deposit" onclick="addDeposit()">+ Tambah Deposit</button>
           </div>
 
-          <!-- Card Target Risk -->
           <div class="card">
             <div class="card-title">Pengaturan Target Profit</div>
             <label>Modal Dasar (Rp)</label>
@@ -213,7 +191,6 @@
             <input type="number" id="inputTarget" value="10" oninput="updateStats()">
           </div>
 
-          <!-- Card Input Trade -->
           <div class="card">
             <div class="card-title">Input Jurnal Trade</div>
             <label>Pasangan Aset / Pair</label>
@@ -234,9 +211,8 @@
           <button class="btn-action btn-logout" onclick="logout()">LOGOUT</button>
         </div>
 
-        <!-- Kolom Kanan: Grafik Grafik Performa & Tabel Jurnal -->
+        <!-- Panel Kanan: Grafik & Tabel -->
         <div>
-          <!-- Card Grafik Performa -->
           <div class="card">
             <div class="card-title">Grafik Performa Saldo & Deposit</div>
             <div class="chart-container">
@@ -244,7 +220,6 @@
             </div>
           </div>
 
-          <!-- Card Tabel Jurnal Transaksi -->
           <div class="card">
             <div class="card-title">Jurnal Transaksi Harian</div>
             <div style="overflow-x: auto;">
@@ -282,7 +257,6 @@
     let todayDeposit = 0;
     let chartInstance = null;
 
-    // Login System
     function login() {
       const user = document.getElementById("username").value.trim();
       const pass = document.getElementById("password").value.trim();
@@ -309,7 +283,6 @@
       document.body.style.alignItems = "center";
     }
 
-    // Live Clock & Date
     function startClock() {
       const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       document.getElementById('currentDate').textContent = new Date().toLocaleDateString('id-ID', optionsDate);
@@ -319,12 +292,10 @@
       }, 1000);
     }
 
-    // Currency Formatting
     function fmt(val) {
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
     }
 
-    // Dynamic Calculations
     function updateStats() {
       const targetPct = parseFloat(document.getElementById('inputTarget').value) || 0;
       
@@ -337,7 +308,6 @@
       document.getElementById('dispTotal').textContent = fmt(totalVal);
     }
 
-    // Add Deposit Feature
     function addDeposit() {
       const depoVal = parseFloat(document.getElementById('inputDeposit').value) || 0;
       if (depoVal <= 0) return;
@@ -348,7 +318,6 @@
 
       updateStats();
 
-      // Log ke tabel
       const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
       const tbody = document.getElementById('journalBody');
       const row = document.createElement('tr');
@@ -360,7 +329,6 @@
       `;
       tbody.prepend(row);
 
-      // Update Chart
       if (chartInstance) {
         chartInstance.data.labels.push(time);
         chartInstance.data.datasets[0].data.push(currentCapital);
@@ -370,7 +338,6 @@
       document.getElementById('inputDeposit').value = '';
     }
 
-    // Add Trade Journal Feature
     function addJournal() {
       const pair = document.getElementById('tradePair').value || 'Aset';
       const res = document.getElementById('tradeResult').value;
@@ -403,7 +370,6 @@
       `;
       tbody.prepend(row);
 
-      // Update Chart
       if (chartInstance) {
         chartInstance.data.labels.push(time);
         chartInstance.data.datasets[0].data.push(currentCapital);
@@ -413,15 +379,15 @@
       document.getElementById('tradeAmount').value = '';
     }
 
-    // Chart.js Setup
     function initChart() {
+      if (chartInstance) return;
       const ctx = document.getElementById('performanceChart').getContext('2d');
       chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
           labels: ['Awal', '09:15'],
           datasets: [{
-            label: 'Pertumbuhan Saldo (Rp)',
+            label: 'Saldo (Rp)',
             data: [1000000, 1100000],
             borderColor: '#10b981',
             backgroundColor: 'rgba(16, 185, 129, 0.1)',
