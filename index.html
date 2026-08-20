@@ -190,38 +190,30 @@
     button.btn-deposit { background: var(--accent-green); }
     button.btn-logout { background: #334155; }
 
-    /* STYLES WEBVIEW OLYMPTRADE */
-    .webview-card {
-      background: var(--bg-card);
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      margin-bottom: 15px;
+    /* CARD OLYMP TRADE REDIRECT */
+    .olymptrade-hero {
+      background: linear-gradient(135deg, #131b26 0%, #1e293b 100%);
+      border: 1px solid var(--accent-blue);
+      border-radius: 16px;
+      padding: 35px 20px;
+      text-align: center;
+      box-shadow: var(--neon-glow);
     }
-    .webview-header {
-      background: #1e293b;
-      padding: 10px 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      font-weight: bold;
-      color: #38bdf8;
-    }
-    .webview-iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      background: #000;
-    }
-    .external-btn {
-      font-size: 11px;
-      background: var(--accent-blue);
+    .olymptrade-hero h3 { font-size: 20px; color: #fff; margin-bottom: 10px; }
+    .olymptrade-hero p { font-size: 13px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.5; }
+    .btn-open-olymp {
+      display: inline-block;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #fff;
-      padding: 4px 10px;
-      border-radius: 6px;
+      font-weight: bold;
+      font-size: 15px;
       text-decoration: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s ease;
     }
+    .btn-open-olymp:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6); }
 
     table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; text-align: left; }
     th, td { padding: 10px; border-bottom: 1px solid var(--border-color); }
@@ -383,14 +375,14 @@
             </div>
           </div>
 
-          <!-- DASHBOARD 2: OLYMP TRADE WEBVIEW LIVE -->
+          <!-- DASHBOARD 2: OLYMP TRADE REDIRECT -->
           <div id="viewDashboard2" style="display: none;">
-            <div class="webview-card">
-              <div class="webview-header">
-                <span>Olymp Trade Platform Live</span>
-                <a href="https://official.olymptrade-id-me.com/" target="_blank" class="external-btn">Buka Tab Baru ↗</a>
-              </div>
-              <iframe src="https://official.olymptrade-id-me.com/" class="webview-iframe" title="Olymp Trade Platform"></iframe>
+            <div class="olymptrade-hero">
+              <h3>Platform Trading Olymp Trade</h3>
+              <p>Demi alasan keamanan pihak Olymp Trade, platform tidak diizinkan tayang dalam jendela aplikasi internal (iframe). Klik tombol di bawah untuk langsung membuka platform resmi Olymp Trade di peramban secara aman.</p>
+              <a href="https://official.olymptrade-id-me.com/" target="_blank" class="btn-open-olymp">
+                Buka Platform Olymp Trade Live ↗
+              </a>
             </div>
           </div>
 
