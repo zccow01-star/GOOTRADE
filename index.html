@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GOTRADE - Professional Trading Dashboard</title>
 
-  <!-- Meta & Link PWA (Menggunakan icon.jpg dan manifest.json) -->
+  <!-- Meta & Link PWA -->
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/jpeg" href="icon.jpg">
   <link rel="apple-touch-icon" href="icon.jpg">
@@ -14,7 +14,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="GOTRADE">
 
-  <!-- Chart.js Library untuk Grafik -->
+  <!-- Chart.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
@@ -33,74 +33,24 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
     body { background: var(--bg-main); color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; }
 
-    .app-container { width: 100%; max-width: 1200px; margin: 0 auto; }
+    .app-container { width: 100%; max-width: 1300px; margin: 0 auto; }
 
     /* --- LOGIN SECTION --- */
     #loginSection {
       max-width: 380px;
       margin: 0 auto;
       background: var(--bg-card);
-      padding: 25px 20px;
+      padding: 30px 24px;
       border-radius: 20px;
       border: 1px solid var(--border-color);
       box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      transition: all 0.3s ease;
     }
 
-    /* LOGO HALAMAN LOGIN */
     .login-logo { text-align: center; font-size: 30px; font-weight: 800; letter-spacing: 2px; color: #3b82f6; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .login-subtitle { text-align: center; color: var(--text-muted); font-size: 12px; margin-bottom: 15px; }
+    .login-subtitle { text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 25px; }
 
-    /* KALKULATOR TAMPIL DI HALAMAN LOGIN (DENGAN EFEK LIST MENYALA) */
-    .calc-container-login {
-      background: var(--bg-input);
-      border: 1px solid #2563eb;
-      box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 20px;
-    }
-
-    .calc-display {
-      width: 100%;
-      height: 40px;
-      background: #000;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      color: #10b981;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: right;
-      padding: 8px 12px;
-      margin-bottom: 10px;
-      outline: none;
-    }
-
-    .calc-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-    }
-
-    .calc-btn {
-      padding: 10px 0;
-      font-size: 14px;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      background: #1e293b;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .calc-btn:active { background: #334155; }
-    .calc-btn.op { background: #2563eb; color: #fff; }
-    .calc-btn.clear { background: #ef4444; color: #fff; }
-    .calc-btn.equal { background: #10b981; color: #fff; grid-column: span 2; }
-
-    /* LIST / INPUT LOGIN DENGAN LIST BORDER MENYALA (GLOW) */
-    label { display: block; font-size: 12px; color: #94a3b8; margin: 10px 0 4px; }
+    /* FORM LOGIN */
+    label { display: block; font-size: 12px; color: #94a3b8; margin: 12px 0 4px; }
     input, select { 
       width: 100%; 
       padding: 12px; 
@@ -112,12 +62,7 @@
       outline: none; 
       transition: all 0.3s ease;
     }
-
-    /* Efek List Menyala Saat Diklik/Fokus */
-    input:focus, select:focus { 
-      border-color: #3b82f6; 
-      box-shadow: var(--neon-glow);
-    }
+    input:focus, select:focus { border-color: #3b82f6; box-shadow: var(--neon-glow); }
 
     .btn-login { 
       width: 100%; 
@@ -129,17 +74,26 @@
       font-size: 15px; 
       font-weight: bold; 
       cursor: pointer; 
-      margin-top: 15px;
+      margin-top: 20px;
       box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-      transition: all 0.3s ease;
-    }
-    .btn-login:hover {
-      box-shadow: var(--neon-glow);
     }
 
-    .admin-link { display: block; text-align: center; margin-top: 15px; color: #60a5fa; text-decoration: none; font-size: 13px; }
+    .btn-register {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 11px;
+      background: #10b981;
+      color: white;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+
+    .admin-link { display: block; text-align: center; margin-top: 18px; color: #60a5fa; text-decoration: none; font-size: 13px; }
     .footer { text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 11px; }
-    .error-msg { color: var(--accent-red); text-align: center; font-size: 12px; margin-top: 10px; display: none; }
 
     /* --- DASHBOARD SECTION --- */
     #dashboardSection { display: none; width: 100%; }
@@ -167,10 +121,31 @@
     }
 
     .brand-title { font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: 1px; }
-
-    .header-info { display: flex; align-items: center; gap: 15px; font-size: 12px; }
+    .header-info { display: flex; align-items: center; gap: 12px; font-size: 12px; }
     .date-badge { background: var(--bg-input); padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); color: #94a3b8; }
     .clock { color: var(--accent-green); font-weight: bold; font-size: 13px; }
+
+    /* TAB DASHBOARD NAVIGATION */
+    .tab-container { display: flex; gap: 10px; margin-bottom: 15px; }
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: #94a3b8;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .tab-btn.active {
+      background: var(--accent-blue);
+      color: #fff;
+      border-color: #3b82f6;
+      box-shadow: var(--neon-glow);
+    }
 
     .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 15px; }
     .stat-card { background: var(--bg-card); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); }
@@ -181,185 +156,241 @@
     @media (min-width: 900px) { .dashboard-layout { grid-template-columns: 320px 1fr; } }
 
     .card { background: var(--bg-card); border-radius: 12px; padding: 18px; border: 1px solid var(--border-color); margin-bottom: 15px; }
-    .card-title { font-size: 14px; font-weight: bold; color: #93c5fd; margin-bottom: 10px; }
+    .card-title { font-size: 14px; font-weight: bold; color: #93c5fd; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+
+    /* KALKULATOR DASHBOARD */
+    .calc-container {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .calc-display {
+      width: 100%;
+      height: 38px;
+      background: #000;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: #10b981;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: right;
+      padding: 6px 10px;
+      margin-bottom: 8px;
+      outline: none;
+    }
+    .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .calc-btn { padding: 8px 0; font-size: 13px; font-weight: bold; border: none; border-radius: 5px; background: #1e293b; color: #fff; cursor: pointer; }
+    .calc-btn:active { background: #334155; }
+    .calc-btn.op { background: #2563eb; color: #fff; }
+    .calc-btn.clear { background: #ef4444; color: #fff; }
+    .calc-btn.equal { background: #10b981; color: #fff; grid-column: span 2; }
 
     button.btn-action { width: 100%; padding: 10px; background: var(--accent-blue); border: none; border-radius: 8px; color: #fff; font-weight: bold; cursor: pointer; margin-top: 10px; }
     button.btn-deposit { background: var(--accent-green); }
     button.btn-logout { background: #334155; }
 
+    /* STYLES WEBVIEW OLYMPTRADE */
+    .webview-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+    .webview-header {
+      background: #1e293b;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+    .webview-iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      background: #000;
+    }
+    .external-btn {
+      font-size: 11px;
+      background: var(--accent-blue);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
     table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; text-align: left; }
     th, td { padding: 10px; border-bottom: 1px solid var(--border-color); }
-    th { color: var(--text-muted); font-weight: 600; }
-    .badge-win { color: var(--accent-green); font-weight: bold; }
-    .badge-loss { color: var(--accent-red); font-weight: bold; }
-    .badge-depo { color: #60a5fa; font-weight: bold; }
-
-    .chart-container { position: relative; height: 220px; width: 100%; }
+    th { color: var(--text-muted); font-size: 11px; text-transform: uppercase; }
   </style>
 </head>
 <body>
 
   <div class="app-container">
 
-    <!-- 1. HALAMAN LOGIN -->
+    <!-- ================= HALAMAN LOGIN ================= -->
     <div id="loginSection">
-      
-      <!-- LOGO DI ATAS -->
       <div class="login-logo">
         <div class="logo-icon"></div> GOTRADE
       </div>
-      <div class="login-subtitle">Trading Capital Management</div>
+      <div class="login-subtitle">Trade & Financial Management</div>
 
-      <!-- KALKULATOR TAMPIL DI BAWAH LOGO HALAMAN LOGIN -->
-      <div class="calc-container-login">
-        <div style="font-size: 11px; color: #93c5fd; font-weight: bold; margin-bottom: 6px; text-align: center;">KALKULATOR QUICK TRADE</div>
-        <input type="text" id="calcDisplay" class="calc-display" value="0" readonly>
-        <div class="calc-grid">
-          <button class="calc-btn clear" onclick="calcClear()">C</button>
-          <button class="calc-btn op" onclick="calcAppend('/')">÷</button>
-          <button class="calc-btn op" onclick="calcAppend('*')">×</button>
-          <button class="calc-btn op" onclick="calcAppend('%')">%</button>
+      <!-- FORM LOGIN -->
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <label for="emailInput">Email Olymp Trade / GOTRADE</label>
+        <input type="email" id="emailInput" placeholder="Masukkan Email" required>
 
-          <button class="calc-btn" onclick="calcAppend('7')">7</button>
-          <button class="calc-btn" onclick="calcAppend('8')">8</button>
-          <button class="calc-btn" onclick="calcAppend('9')">9</button>
-          <button class="calc-btn op" onclick="calcAppend('-')">-</button>
+        <label for="passwordInput">Kata Sandi</label>
+        <input type="password" id="passwordInput" placeholder="Masukkan Kata Sandi" required>
 
-          <button class="calc-btn" onclick="calcAppend('4')">4</button>
-          <button class="calc-btn" onclick="calcAppend('5')">5</button>
-          <button class="calc-btn" onclick="calcAppend('6')">6</button>
-          <button class="calc-btn op" onclick="calcAppend('+')">+</button>
+        <button type="submit" class="btn-login">MASUK DASHBOARD</button>
 
-          <button class="calc-btn" onclick="calcAppend('1')">1</button>
-          <button class="calc-btn" onclick="calcAppend('2')">2</button>
-          <button class="calc-btn" onclick="calcAppend('3')">3</button>
-          <button class="calc-btn" onclick="calcAppend('.')">.</button>
+        <!-- TAUTAN DAFTAR -->
+        <a href="https://olymp.gl/ReyOlympTrade" target="_blank" class="btn-register">
+          Daftar Akun Baru (Olymp Trade)
+        </a>
+      </form>
 
-          <button class="calc-btn" onclick="calcAppend('0')">0</button>
+      <a href="https://official.olymptrade-id-me.com/" target="_blank" class="admin-link">
+        Buka Portal Resmi Olymp Trade ↗
+      </a>
 
-          <button class="calc-btn equal" onclick="calcCalculate()">=</button>
-        </div>
-      </div>
-
-      <!-- FORM LOGIN DENGAN LIST MENYALA -->
-      <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Masukkan username">
-
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Masukkan password">
-
-      <div class="error-msg" id="error">Username dan password wajib diisi.</div>
-
-      <button class="btn-login" onclick="login()">LOGIN</button>
-      <a class="admin-link" href="https://wa.me/6285205110015" target="_blank">Hubungi Admin</a>
-      <div class="footer">© 2026 GOTRADE</div>
+      <div class="footer">GOTRADE v2.0 - Multi-Platform Tool</div>
     </div>
 
-    <!-- 2. HALAMAN DASHBOARD PROFESIONAL -->
+    <!-- ================= HALAMAN DASHBOARD ================= -->
     <div id="dashboardSection">
       
-      <!-- Custom Header Bar -->
       <header>
         <div class="brand-logo">
           <div class="logo-icon"></div>
-          <div class="brand-title">GOTRADE <span style="font-size: 11px; color: var(--text-muted); font-weight: normal;">PRO</span></div>
+          <div class="brand-title">GOTRADE</div>
         </div>
         <div class="header-info">
-          <div class="date-badge" id="currentDate">Memuat tanggal...</div>
+          <div class="date-badge" id="currentDate">-- --- ----</div>
           <div class="clock" id="liveClock">00:00:00</div>
+          <button class="btn-action btn-logout" style="width: auto; padding: 6px 12px; margin-top: 0;" onclick="logout()">Keluar</button>
         </div>
       </header>
 
-      <!-- Stats Metric -->
+      <!-- TAB NAVIGATION -->
+      <div class="tab-container">
+        <div class="tab-btn active" id="tabBtn1" onclick="switchTab(1)">Dashboard 1: Jurnal & Grafik</div>
+        <div class="tab-btn" id="tabBtn2" onclick="switchTab(2)">Dashboard 2: Olymp Trade Live</div>
+      </div>
+
       <div class="grid-stats">
         <div class="stat-card">
-          <div class="stat-title">Modal Utama (Equity)</div>
-          <div class="stat-value" id="dispEquity">Rp 1.000.000</div>
+          <div class="stat-title">Saldo Saat Ini</div>
+          <div class="stat-value" id="dispBalance" style="color: #60a5fa;">Rp 0</div>
         </div>
         <div class="stat-card">
-          <div class="stat-title">Target Profit Harian</div>
-          <div class="stat-value" style="color: var(--accent-green);" id="dispTarget">+ Rp 100.000 (10%)</div>
+          <div class="stat-title">Total Deposit</div>
+          <div class="stat-value" id="dispDeposit" style="color: #10b981;">Rp 0</div>
         </div>
         <div class="stat-card">
-          <div class="stat-title">Deposit Hari Ini</div>
-          <div class="stat-value" style="color: #60a5fa;" id="dispTodayDeposit">Rp 0</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-title">Estimasi Total Saldo</div>
-          <div class="stat-value" style="color: #38bdf8;" id="dispTotal">Rp 1.100.000</div>
+          <div class="stat-title">Total Profit / Loss</div>
+          <div class="stat-value" id="dispPnL" style="color: #f59e0b;">Rp 0</div>
         </div>
       </div>
 
       <div class="dashboard-layout">
         
-        <!-- Panel Kiri: Input Data -->
-        <div>
+        <!-- SIDEBAR (BERISI KALKULATOR & INPUT SALDO) -->
+        <div class="sidebar">
+          
+          <!-- KALKULATOR TRADING DALAM DASHBOARD -->
           <div class="card">
-            <div class="card-title">Input Deposit Hari Ini</div>
-            <label>Jumlah Deposit (Rp)</label>
-            <input type="number" id="inputDeposit" placeholder="Contoh: 500000">
-            <button class="btn-action btn-deposit" onclick="addDeposit()">+ Tambah Deposit</button>
-          </div>
+            <div class="card-title">Kalkulator Cepat</div>
+            <div class="calc-container">
+              <input type="text" id="calcDisplay" class="calc-display" value="0" readonly>
+              <div class="calc-grid">
+                <button class="calc-btn clear" onclick="clearCalc()">C</button>
+                <button class="calc-btn op" onclick="appendCalc('/')">÷</button>
+                <button class="calc-btn op" onclick="appendCalc('*')">×</button>
+                <button class="calc-btn op" onclick="appendCalc('-')">−</button>
 
-          <div class="card">
-            <div class="card-title">Pengaturan Target Profit</div>
-            <label>Modal Dasar (Rp)</label>
-            <input type="number" id="inputCapital" value="1000000" oninput="updateStats()">
-            
-            <label>Target Profit (%)</label>
-            <input type="number" id="inputTarget" value="10" oninput="updateStats()">
-          </div>
+                <button class="calc-btn" onclick="appendCalc('7')">7</button>
+                <button class="calc-btn" onclick="appendCalc('8')">8</button>
+                <button class="calc-btn" onclick="appendCalc('9')">9</button>
+                <button class="calc-btn op" onclick="appendCalc('+')">+</button>
 
-          <div class="card">
-            <div class="card-title">Input Jurnal Trade</div>
-            <label>Pasangan Aset / Pair</label>
-            <input type="text" id="tradePair" placeholder="Contoh: BTC/USDT">
-            
-            <label>Hasil Trade</label>
-            <select id="tradeResult">
-              <option value="WIN">WIN (+)</option>
-              <option value="LOSS">LOSS (-)</option>
-            </select>
+                <button class="calc-btn" onclick="appendCalc('4')">4</button>
+                <button class="calc-btn" onclick="appendCalc('5')">5</button>
+                <button class="calc-btn" onclick="appendCalc('6')">6</button>
+                <button class="calc-btn equal" onclick="calculateResult()">=</button>
 
-            <label>Nominal (Rp)</label>
-            <input type="number" id="tradeAmount" placeholder="100000">
-
-            <button class="btn-action" onclick="addJournal()">Simpan Transaksi</button>
-          </div>
-
-          <button class="btn-action btn-logout" onclick="logout()">LOGOUT</button>
-        </div>
-
-        <!-- Panel Kanan: Grafik & Tabel -->
-        <div>
-          <div class="card">
-            <div class="card-title">Grafik Performa Saldo & Deposit</div>
-            <div class="chart-container">
-              <canvas id="performanceChart"></canvas>
+                <button class="calc-btn" onclick="appendCalc('1')">1</button>
+                <button class="calc-btn" onclick="appendCalc('2')">2</button>
+                <button class="calc-btn" onclick="appendCalc('3')">3</button>
+                <button class="calc-btn" onclick="appendCalc('0')">0</button>
+              </div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-title">Jurnal Transaksi Harian</div>
-            <div style="overflow-x: auto;">
+            <div class="card-title">Kelola Saldo</div>
+            <label>Set Deposit Pertama (Rp)</label>
+            <input type="number" id="depositAmount" placeholder="150000">
+            <button class="btn-action btn-deposit" onclick="setDeposit()">Tambah Deposit</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Input Transaksi</div>
+            <label>Tipe Transaksi</label>
+            <select id="tradeType">
+              <option value="PROFIT">PROFIT</option>
+              <option value="LOSS">LOSS</option>
+            </select>
+
+            <label>Jumlah (Rp)</label>
+            <input type="number" id="tradeAmount" placeholder="14000">
+
+            <button class="btn-action" onclick="addTransaction()">Simpan Transaksi</button>
+          </div>
+
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+          
+          <!-- DASHBOARD 1: JURNAL & GRAFIK -->
+          <div id="viewDashboard1">
+            <div class="card">
+              <div class="card-title">Grafik Perkembangan Saldo</div>
+              <canvas id="balanceChart" height="110"></canvas>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Riwayat Transaksi</div>
               <table>
                 <thead>
                   <tr>
                     <th>Waktu</th>
-                    <th>Pair / Tipe</th>
-                    <th>Hasil</th>
-                    <th>Nominal</th>
+                    <th>Jenis</th>
+                    <th>Jumlah</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
-                <tbody id="journalBody">
-                  <tr>
-                    <td>09:15</td>
-                    <td>BTC/USDT</td>
-                    <td><span class="badge-win">WIN</span></td>
-                    <td style="color: var(--accent-green);">+ Rp 100.000</td>
-                  </tr>
+                <tbody id="historyTable">
+                  <tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Belum ada catatan.</td></tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+
+          <!-- DASHBOARD 2: OLYMP TRADE WEBVIEW LIVE -->
+          <div id="viewDashboard2" style="display: none;">
+            <div class="webview-card">
+              <div class="webview-header">
+                <span>Olymp Trade Platform Live</span>
+                <a href="https://official.olymptrade-id-me.com/" target="_blank" class="external-btn">Buka Tab Baru ↗</a>
+              </div>
+              <iframe src="https://official.olymptrade-id-me.com/" class="webview-iframe" title="Olymp Trade Platform"></iframe>
             </div>
           </div>
 
@@ -372,192 +403,180 @@
   </div>
 
   <script>
-    let currentCapital = 1000000;
-    let todayDeposit = 0;
-    let chartInstance = null;
-
-    /* --- LOGIKA KALKULATOR --- */
+    // --- KALKULATOR SCRIPT ---
     let calcVal = "0";
-
-    function calcUpdate() {
-      document.getElementById("calcDisplay").value = calcVal;
+    function updateCalcDisplay() { document.getElementById("calcDisplay").value = calcVal; }
+    function appendCalc(val) {
+      if (calcVal === "0" && val !== ".") calcVal = "";
+      calcVal += val;
+      updateCalcDisplay();
+    }
+    function clearCalc() { calcVal = "0"; updateCalcDisplay(); }
+    function calculateResult() {
+      try { calcVal = eval(calcVal).toString(); } catch(e) { calcVal = "Error"; }
+      updateCalcDisplay();
     }
 
-    function calcAppend(val) {
-      if (calcVal === "0" && val !== ".") {
-        calcVal = val;
+    // --- TAB SWITCHER ---
+    function switchTab(tabNum) {
+      const tab1 = document.getElementById("viewDashboard1");
+      const tab2 = document.getElementById("viewDashboard2");
+      const btn1 = document.getElementById("tabBtn1");
+      const btn2 = document.getElementById("tabBtn2");
+
+      if (tabNum === 1) {
+        tab1.style.display = "block";
+        tab2.style.display = "none";
+        btn1.classList.add("active");
+        btn2.classList.remove("active");
       } else {
-        calcVal += val;
+        tab1.style.display = "none";
+        tab2.style.display = "block";
+        btn2.classList.add("active");
+        btn1.classList.remove("active");
       }
-      calcUpdate();
     }
 
-    function calcClear() {
-      calcVal = "0";
-      calcUpdate();
-    }
+    // --- DASHBOARD DATA & MANAGEMENT ---
+    let balance = parseFloat(localStorage.getItem("gotrade_balance")) || 0;
+    let totalDeposit = parseFloat(localStorage.getItem("gotrade_deposit")) || 0;
+    let history = JSON.parse(localStorage.getItem("gotrade_history")) || [];
 
-    function calcCalculate() {
-      try {
-        let expr = calcVal.replace(/%/g, "/100");
-        let res = eval(expr);
-        calcVal = Number.isInteger(res) ? res.toString() : res.toFixed(2).toString();
-      } catch (e) {
-        calcVal = "Error";
-      }
-      calcUpdate();
-    }
-
-    /* --- LOGIKA APP GOTRADE --- */
-    function login() {
-      const user = document.getElementById("username").value.trim();
-      const pass = document.getElementById("password").value.trim();
-      const err = document.getElementById("error");
-
-      if (user === "" || pass === "") {
-        err.style.display = "block";
-        return;
-      }
-
-      err.style.display = "none";
+    function handleLogin(e) {
+      e.preventDefault();
       document.getElementById("loginSection").style.display = "none";
       document.getElementById("dashboardSection").style.display = "block";
-      document.body.style.alignItems = "stretch";
-
-      startClock();
-      updateStats();
       initChart();
+      updateDashboard();
     }
 
     function logout() {
       document.getElementById("dashboardSection").style.display = "none";
       document.getElementById("loginSection").style.display = "block";
-      document.body.style.alignItems = "center";
     }
 
-    function startClock() {
-      const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      document.getElementById('currentDate').textContent = new Date().toLocaleDateString('id-ID', optionsDate);
-
-      setInterval(() => {
-        document.getElementById("liveClock").textContent = new Date().toLocaleTimeString('id-ID');
-      }, 1000);
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("liveClock").innerText = now.toLocaleTimeString('id-ID');
+      document.getElementById("currentDate").innerText = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
     }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    function fmt(val) {
-      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
-    }
-
-    function updateStats() {
-      const targetPct = parseFloat(document.getElementById('inputTarget').value) || 0;
+    function setDeposit() {
+      const depVal = parseFloat(document.getElementById("depositAmount").value);
+      if (isNaN(depVal) || depVal <= 0) return alert("Masukkan jumlah deposit yang valid!");
       
-      const targetVal = currentCapital * (targetPct / 100);
-      const totalVal = currentCapital + targetVal;
-
-      document.getElementById('dispEquity').textContent = fmt(currentCapital);
-      document.getElementById('dispTarget').textContent = `+ ${fmt(targetVal)} (${targetPct}%)`;
-      document.getElementById('dispTodayDeposit').textContent = fmt(todayDeposit);
-      document.getElementById('dispTotal').textContent = fmt(totalVal);
+      totalDeposit += depVal;
+      balance += depVal;
+      saveAndRender();
+      document.getElementById("depositAmount").value = "";
     }
 
-    function addDeposit() {
-      const depoVal = parseFloat(document.getElementById('inputDeposit').value) || 0;
-      if (depoVal <= 0) return;
+    function addTransaction() {
+      const type = document.getElementById("tradeType").value;
+      const amt = parseFloat(document.getElementById("tradeAmount").value);
+      if (isNaN(amt) || amt <= 0) return alert("Masukkan jumlah transaksi yang valid!");
 
-      todayDeposit += depoVal;
-      currentCapital += depoVal;
-      document.getElementById('inputCapital').value = currentCapital;
-
-      updateStats();
-
-      const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-      const tbody = document.getElementById('journalBody');
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${time}</td>
-        <td>DEPOSIT</td>
-        <td><span class="badge-depo">DEPO</span></td>
-        <td style="color: #60a5fa;">+ ${fmt(depoVal)}</td>
-      `;
-      tbody.prepend(row);
-
-      if (chartInstance) {
-        chartInstance.data.labels.push(time);
-        chartInstance.data.datasets[0].data.push(currentCapital);
-        chartInstance.update();
-      }
-
-      document.getElementById('inputDeposit').value = '';
-    }
-
-    function addJournal() {
-      const pair = document.getElementById('tradePair').value || 'Aset';
-      const res = document.getElementById('tradeResult').value;
-      const amt = parseFloat(document.getElementById('tradeAmount').value) || 0;
-      const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-
-      if (amt <= 0) return;
-
-      const isWin = res === 'WIN';
-      if (isWin) {
-        currentCapital += amt;
+      if (type === "PROFIT") {
+        balance += amt;
       } else {
-        currentCapital -= amt;
-      }
-      document.getElementById('inputCapital').value = currentCapital;
-
-      updateStats();
-
-      const tbody = document.getElementById('journalBody');
-      const row = document.createElement('tr');
-      const badgeClass = isWin ? 'badge-win' : 'badge-loss';
-      const colorStyle = isWin ? 'color: var(--accent-green);' : 'color: var(--accent-red);';
-      const sign = isWin ? '+' : '-';
-
-      row.innerHTML = `
-        <td>${time}</td>
-        <td>${pair}</td>
-        <td><span class="${badgeClass}">${res}</span></td>
-        <td style="${colorStyle}">${sign} ${fmt(amt)}</td>
-      `;
-      tbody.prepend(row);
-
-      if (chartInstance) {
-        chartInstance.data.labels.push(time);
-        chartInstance.data.datasets[0].data.push(currentCapital);
-        chartInstance.update();
+        balance -= amt;
       }
 
-      document.getElementById('tradeAmount').value = '';
+      const item = {
+        id: Date.now(),
+        time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+        type: type,
+        amount: amt
+      };
+
+      history.unshift(item);
+      saveAndRender();
+      document.getElementById("tradeAmount").value = "";
     }
 
+    function deleteItem(id) {
+      history = history.filter(x => x.id !== id);
+      saveAndRender();
+    }
+
+    function saveAndRender() {
+      localStorage.setItem("gotrade_balance", balance);
+      localStorage.setItem("gotrade_deposit", totalDeposit);
+      localStorage.setItem("gotrade_history", JSON.stringify(history));
+      updateDashboard();
+    }
+
+    function updateDashboard() {
+      document.getElementById("dispBalance").innerText = "Rp " + balance.toLocaleString('id-ID');
+      document.getElementById("dispDeposit").innerText = "Rp " + totalDeposit.toLocaleString('id-ID');
+      
+      let pnl = balance - totalDeposit;
+      let pnlEl = document.getElementById("dispPnL");
+      pnlEl.innerText = (pnl >= 0 ? "+ Rp " : "- Rp ") + Math.abs(pnl).toLocaleString('id-ID');
+      pnlEl.style.color = pnl >= 0 ? "#10b981" : "#ef4444";
+
+      // Render Table History
+      const tbody = document.getElementById("historyTable");
+      if (history.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Belum ada catatan.</td></tr>';
+      } else {
+        tbody.innerHTML = history.map(h => `
+          <tr>
+            <td>${h.time}</td>
+            <td style="color: ${h.type === 'PROFIT' ? '#10b981' : '#ef4444'}; font-weight: bold;">${h.type}</td>
+            <td>Rp ${h.amount.toLocaleString('id-ID')}</td>
+            <td><button onclick="deleteItem(${h.id})" style="background:none; border:none; color:#ef4444; cursor:pointer;">✕</button></td>
+          </tr>
+        `).join('');
+      }
+
+      updateChart();
+    }
+
+    // --- CHART MANAGEMENT ---
+    let myChart = null;
     function initChart() {
-      if (chartInstance) return;
-      const ctx = document.getElementById('performanceChart').getContext('2d');
-      chartInstance = new Chart(ctx, {
+      const ctx = document.getElementById('balanceChart').getContext('2d');
+      myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['Awal', '09:15'],
+          labels: ['Awal', ...history.slice(0, 10).reverse().map(h => h.time)],
           datasets: [{
-            label: 'Saldo (Rp)',
-            data: [1000000, 1100000],
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            label: 'Riwayat Transaksi',
+            data: [totalDeposit, ...history.slice(0, 10).reverse().map(h => h.amount)],
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
             fill: true,
-            tension: 0.3,
-            borderWidth: 2
+            tension: 0.3
           }]
         },
         options: {
           responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
           scales: {
             x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } },
             y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } }
           }
         }
       });
+    }
+
+    function updateChart() {
+      if (!myChart) return;
+      myChart.data.labels = ['Modal', ...history.slice(0, 10).reverse().map(h => h.time)];
+      
+      let runningBal = totalDeposit;
+      let dataPoints = [runningBal];
+      
+      [...history].reverse().slice(-10).forEach(h => {
+        if (h.type === 'PROFIT') runningBal += h.amount;
+        else runningBal -= h.amount;
+        dataPoints.push(runningBal);
+      });
+
+      myChart.data.datasets[0].data = dataPoints;
+      myChart.update();
     }
   </script>
 </body>
